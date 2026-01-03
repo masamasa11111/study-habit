@@ -4,7 +4,20 @@
   <meta charset="UTF-8">
   <title>勉強習慣</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 16px;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+  </style>
 </head>
+
 <body>
 
 <h2>今日は勉強できた？</h2>
@@ -13,16 +26,47 @@
 <button onclick="notDone()">できなかった</button>
 
 <p id="message"></p>
+<p id="streak"></p>
 
 <script>
+  // 今日の日付（YYYY-MM-DD）
+  const today = new Date().toISOString().split("T")[0];
+
+  // 保存データ取得
+  let lastDate = localStorage.getItem("lastDate");
+  let streak = Number(localStorage.getItem("streak")) || 0;
+
+  // 表示更新
+  function updateView() {
+    document.getElementById("streak").innerText =
+      "🔥 連続記録：" + streak + "日";
+  }
+
+  updateView();
+
   function done() {
+    if (lastDate !== today) {
+      streak += 1;
+      localStorage.setItem("streak", streak);
+      localStorage.setItem("lastDate", today);
+      lastDate = today;
+    }
+
     document.getElementById("message").innerText =
       "今日の一歩、ちゃんと未来につながってるよ。";
+
+    updateView();
   }
 
   function notDone() {
+    streak = 0;
+    localStorage.setItem("streak", streak);
+    localStorage.setItem("lastDate", today);
+
     document.getElementById("message").innerText =
-      "今日はできなかったね。でも大丈夫。";
+      "今日はできなかったね。でも、また明日でいい。";
+
+    updateView();
   }
 </script>
 
