@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>勉強習慣</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<h2>今日は勉強できた？</h2>
+
+<button onclick="done()">できた</button>
+<button onclick="notDone()">できなかった</button>
+
+<p id="message"></p>
+
+<script>
+  function done() {
+    document.getElementById("message").innerText =
+      "今日の一歩、ちゃんと未来につながってるよ。";
+  }
+
+  function notDone() {
+    document.getElementById("message").innerText =
+      "今日はできなかったね。でも大丈夫。";
+  }
+</script>
+
+</body>
+</html>
